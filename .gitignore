@@ -6,4 +6,4 @@ build
 
 # config
 vcs.xml
-.idea
+.idea/
