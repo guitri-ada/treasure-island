@@ -16,23 +16,17 @@ abstract class Grid{
         // define row number
         var rowNo = 1
 
-        // for each row
+        // print rows
         for (row in grid) {
 
-            // print row number
             print("${rowNo++} ")
 
-            // for each element in row
             for (cell in row) {
-
-                // print cell
                 print(cell)
             }
 
-            // line break
             println()
         }
 
     }
-
 }
