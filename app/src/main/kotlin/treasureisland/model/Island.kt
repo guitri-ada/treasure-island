@@ -4,7 +4,7 @@ import treasureisland.util.Coordinates
 import treasureisland.util.GameConstants as GC
 
 class Island(
-    private var grid: Array<MutableList<String>> = arrayOf(),
+    var grid: Array<MutableList<String>> = arrayOf(),
     private val pirates: MutableList<Pirate> = mutableListOf(),
     private val treasures: MutableList<Treasure> = mutableListOf(),
     private var revealedCells: MutableSet<Pair<Int, Int>> = mutableSetOf()
@@ -26,5 +26,40 @@ class Island(
         }
     }
 
+    fun print() {
 
+        // print column names
+        println("   A  B  C  D  E  F  G  H  ")
+
+        // define row number
+        var rowNo = 1
+
+        // print rows
+        for (row in grid) {
+            print("${rowNo++} ")
+
+            for (cell in row) {
+                print(cell)
+            }
+
+            println()
+        }
+
+    }
+
+
+
+    fun revealCell(cell: Pair<Int, Int>) {
+
+        // check revealed cell against pirate/treasure coordinates
+        // and define cell type variable accordingly
+        val cellType = when {
+            pirates.any { it.coordinates == cell } -> GC.PIRATE_CELL
+            treasures.any { it.coordinates == cell } -> GC.TREASURE_CELL
+            else -> GC.EMPTY_CELL
+        }
+
+        // reveal cell and assign it to corresponding type
+        this.grid[cell.first][cell.second] = cellType
+    }
 }
