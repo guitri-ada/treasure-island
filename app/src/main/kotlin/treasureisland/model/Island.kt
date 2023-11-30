@@ -5,8 +5,8 @@ import treasureisland.util.GameConstants as GC
 
 class Island(
     var grid: Array<MutableList<String>> = arrayOf(),
-    private val pirates: MutableList<Pirate> = mutableListOf(),
-    private val treasures: MutableList<Treasure> = mutableListOf(),
+    val pirates: MutableList<Pirate> = mutableListOf(),
+    val treasures: MutableList<Treasure> = mutableListOf(),
     private var revealedCells: MutableSet<Pair<Int, Int>> = mutableSetOf()
 ) {
 
@@ -48,18 +48,39 @@ class Island(
     }
 
 
+    fun revealCell(cell: Pair<Int, Int>): Any? {
 
-    fun revealCell(cell: Pair<Int, Int>) {
+        // check is cell is valid and not already revealed
+        if (!isValidCell(cell) || revealedCells.contains(cell)) {
+            println("Invalid coordinates or cell already revealed.\nPlease try again.")
+            return null
+        }
 
-        // check revealed cell against pirate/treasure coordinates
-        // and define cell type variable accordingly
+        // check valid cell input against pirate/treasure coordinates
+        val pirate = pirates.find { it.coordinates == cell }
+        val treasure = treasures.find { it.coordinates == cell }
+
+        // define cellType to print accordingly
         val cellType = when {
-            pirates.any { it.coordinates == cell } -> GC.PIRATE_CELL
-            treasures.any { it.coordinates == cell } -> GC.TREASURE_CELL
+            pirate != null -> GC.PIRATE_CELL
+            treasure != null -> GC.TREASURE_CELL
             else -> GC.EMPTY_CELL
         }
 
         // reveal cell and assign it to corresponding type
         this.grid[cell.first][cell.second] = cellType
+
+        // add revealed cell in list to keep track
+        revealedCells.add(cell)
+
+        // return pirate or treasure or null
+        return pirate ?: treasure
+    }
+
+
+    // to check if coordinates are valid (part of the grid)
+    private fun isValidCell(cell: Pair<Int, Int>): Boolean {
+        val (row, col) = cell
+        return row in 0..8 && col in 0..8
     }
 }
