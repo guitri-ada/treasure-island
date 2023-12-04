@@ -4,10 +4,10 @@ import treasureisland.util.Coordinates
 import treasureisland.util.GameConstants as GC
 
 class Island(
-    var grid: Array<MutableList<String>> = arrayOf(),
-    val pirates: MutableList<Pirate> = mutableListOf(),
-    val treasures: MutableList<Treasure> = mutableListOf(),
-    private var revealedCells: MutableSet<Pair<Int, Int>> = mutableSetOf()
+    private var grid: Array<MutableList<String>> = arrayOf(),
+    private val pirates: MutableList<Pirate> = mutableListOf(),
+    private val treasures: MutableList<Treasure> = mutableListOf(),
+    var revealedCells: MutableSet<Pair<Int, Int>> = mutableSetOf()
 ) {
 
     init {
@@ -50,12 +50,6 @@ class Island(
 
     fun revealCell(cell: Pair<Int, Int>): Any? {
 
-        // check is cell is valid and not already revealed
-        if (!isValidCell(cell) || revealedCells.contains(cell)) {
-            println("Invalid coordinates or cell already revealed.\nPlease try again.")
-            return null
-        }
-
         // check valid cell input against pirate/treasure coordinates
         val pirate = pirates.find { it.coordinates == cell }
         val treasure = treasures.find { it.coordinates == cell }
@@ -77,10 +71,4 @@ class Island(
         return pirate ?: treasure
     }
 
-
-    // to check if coordinates are valid (part of the grid)
-    private fun isValidCell(cell: Pair<Int, Int>): Boolean {
-        val (row, col) = cell
-        return row in 0..8 && col in 0..8
-    }
 }

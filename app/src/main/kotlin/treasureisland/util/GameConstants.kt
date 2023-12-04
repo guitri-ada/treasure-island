@@ -8,6 +8,7 @@ object GameConstants {
     const val GREEN = "\u001B[32m"
     const val BLUE = "\u001B[34m"
     const val YELLOW = "\u001B[33m"
+    const val CLEAR_SCREEN = "\u001b[H\u001b[2J"
 
     // Cell entities constants
     const val TREASURE_CELL = "$GREEN T $COLOR_RESET"
@@ -18,5 +19,5 @@ object GameConstants {
     val TREASURE_VALUES = listOf(100, 100, 500, 500, 1000)
 
     // Pirate constants
-    val PIRATE_PERCENT_OFF = listOf(0.1f, 0.1f, 0.2f, 0.2f, 0.5f)
+    val PIRATE_PERCENT_OFF = listOf(10, 10, 20, 20, 50)
 }

@@ -7,7 +7,7 @@ import treasureisland.model.Player
 import treasureisland.model.Treasure
 
 class Game(
-    private val island: Island = Island(),
+    val island: Island = Island(),
     private val player: Player = Player()
 ) {
 
@@ -33,9 +33,9 @@ class Game(
 
                 usersActionResult =
                 "${GC.RED}Oh no! It's a pirate!\n" +
-                "They're stealing ${revealedCellObject.percentOffTreasureVal * 100}% off your gold!${GC.COLOR_RESET}\n"
+                "They're stealing ${revealedCellObject.percentOffTreasureVal}% off your gold!${GC.COLOR_RESET}\n"
 
-                player.score -= (player.score * revealedCellObject.percentOffTreasureVal).toInt()
+                player.score -= (player.score * revealedCellObject.percentOffTreasureVal / 100)
             }
 
             is Treasure -> {

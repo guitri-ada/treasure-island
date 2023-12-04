@@ -10,34 +10,50 @@ class GameController(
 
         while (!isGameOver) {
 
-            val userInput = getUserInput()
-            game.update(userInput)
+            var userInput: Pair<Int, Int>
 
+            while (true) {
+                userInput = getUserInput()
+                if (!isAlreadyRevealed(userInput)) break
+                println("Cell already revealed, try again!")
+            }
+
+            game.update(userInput)
             // if ... isGameOver = true
 
         }
 
     }
 
-
+    private fun isAlreadyRevealed(cell: Pair<Int, Int>): Boolean {
+        return game.island.revealedCells.contains(cell)
+    }
 
     private fun getUserInput(): Pair<Int, Int> {
+        val rowInput = getValidRow()
+        val colInput = getValidColumn()
+        return Pair(rowInput, colInput)
+    }
 
+    private fun getValidRow(): Int {
         while (true) {
-
             try {
                 print("ROW: ")
-                val rowInput: Int = readln().toInt()
-
-                print("COLUMN: ")
-                val colInput: Int = colToInt(readln())
-
-                return Pair(rowInput, colInput)
-
+                val rowInput = readln().toInt() - 1
+                if (rowInput in 0..7) return rowInput
+                println("Invalid row. Please enter a number between 1 and 8.")
             } catch (e: NumberFormatException) {
-                println("Invalid row. Please enter a valid integer.")
+                println("Invalid input. Please enter a valid integer for row.")
             }
+        }
+    }
 
+    private fun getValidColumn(): Int {
+        while (true) {
+            print("COLUMN: ")
+            val colInput = colToInt(readln())
+            if (colInput in 0..7) return colInput
+            println("Invalid column. Please enter a letter between A and H.")
         }
     }
 

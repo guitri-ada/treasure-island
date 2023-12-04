@@ -3,7 +3,7 @@ package treasureisland.util
 object Coordinates {
 
     // generate a pool of coordinates to pick from
-    val coordinatesPool: MutableSet<Pair<Int, Int>> =
+    private val coordinatesPool: MutableSet<Pair<Int, Int>> =
         (0 until 8).flatMap { x ->
             (0 until 8).map { y -> Pair(x, y) }
         }.toMutableSet()
