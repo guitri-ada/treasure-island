@@ -8,7 +8,9 @@ import treasureisland.model.Treasure
 
 class Game(
     val island: Island = Island(),
-    private val player: Player = Player()
+    val player: Player = Player(),
+    var treasureCount: Int = 0,
+    var isGameOver: Boolean = false
 ) {
 
 
@@ -43,9 +45,13 @@ class Game(
                     "${GC.GREEN}You found $${revealedCellObject.value} of gold!${GC.COLOR_RESET}\n"
 
                 player.score += revealedCellObject.value
+
+                // if 5 treasures have been found, game is over
+                isGameOver = (++treasureCount == 5)
             }
+
             null -> {
-                usersActionResult = "${GC.YELLOW}There's nothing there... keep exploring!${GC.COLOR_RESET}\n"
+                usersActionResult = "${GC.YELLOW}Nothing there...${GC.COLOR_RESET}\n"
             }
 
         }
@@ -63,6 +69,8 @@ class Game(
 
 
     fun end() {
+        println("You found all the treasures! Congratulations!")
+        println("\nYour score is ${player.score}!")
 
     }
 

@@ -4,38 +4,41 @@ import treasureisland.util.GameConstants as GC
 
 class GameController(
     private val game: Game = Game(),
-    private var isGameOver: Boolean = false
+    private val userInputHandler: UserInputHandler = UserInputHandler()
 ) {
 
     fun run() {
         game.start()
 
-        while (!isGameOver) {
+        while (true) {
 
             var userInput: Pair<Int, Int>
 
             while (true) {
-                userInput = getUserInput()
+                userInput = userInputHandler.getUserInput()
 
-                if (!isAlreadyRevealed(userInput)) break
+                // check if cell has already been revealed
+                if (!game.island.revealedCells.contains(userInput)) break
                 println("Cell already revealed, try again!")
 
             }
 
+            // update the game state
             game.update(userInput)
 
-            if (game.player.treasureCount == 5) {
-                game.end()
+            // break if game is over
+            if (game.isGameOver) {
                 break
             }
 
-            println("${GC.MAGENTA}${checkSurroundings(userInput)}${GC.COLOR_RESET}\n")
+            // check surrounding cells and print clues
+            println("${GC.MAGENTA}${generateClues(userInput)}${GC.COLOR_RESET}\n")
 
         }
 
     }
 
-    private fun checkSurroundings(cell: Pair<Int, Int>): String {
+    private fun generateClues(cell: Pair<Int, Int>): String {
         val treasureMessage = isTreasureNearby(cell)
         val pirateMessage = isPirateNearby(cell)
 
@@ -86,51 +89,4 @@ class GameController(
         return null
     }
 
-    private fun isAlreadyRevealed(cell: Pair<Int, Int>): Boolean {
-        return game.island.revealedCells.contains(cell)
-    }
-
-    private fun getUserInput(): Pair<Int, Int> {
-        val rowInput = getValidRow()
-        val colInput = getValidColumn()
-        return Pair(rowInput, colInput)
-    }
-
-    private fun getValidRow(): Int {
-        while (true) {
-            try {
-                print("ROW: ")
-                val rowInput = readln().toInt() - 1
-                if (rowInput in 0..7) return rowInput
-                println("Invalid row. Please enter a number between 1 and 8.")
-            } catch (e: NumberFormatException) {
-                println("Invalid input. Please enter a valid integer for row.")
-            }
-        }
-    }
-
-    private fun getValidColumn(): Int {
-        while (true) {
-            print("COLUMN: ")
-            val colInput = colToInt(readln())
-            if (colInput in 0..7) return colInput
-            println("Invalid column. Please enter a letter between A and H.")
-        }
-    }
-
-    private fun colToInt(col: String): Int {
-
-        return when (col.uppercase()) {
-            "A" -> 0
-            "B" -> 1
-            "C" -> 2
-            "D" -> 3
-            "E" -> 4
-            "F" -> 5
-            "G" -> 6
-            "H" -> 7
-            else -> -1
-        }
-
-    }
 }
