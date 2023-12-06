@@ -3,10 +3,11 @@ package treasureisland.model
 import treasureisland.util.Coordinates
 import treasureisland.util.GameConstants as GC
 
+
 class Island(
     private var grid: Array<MutableList<String>> = arrayOf(),
-    private val pirates: MutableList<Pirate> = mutableListOf(),
-    private val treasures: MutableList<Treasure> = mutableListOf(),
+    val pirates: MutableList<Pirate> = mutableListOf(),
+    val treasures: MutableList<Treasure> = mutableListOf(),
     var revealedCells: MutableSet<Pair<Int, Int>> = mutableSetOf()
 ) {
 
@@ -29,7 +30,7 @@ class Island(
     fun print() {
 
         // print column names
-        println("   A  B  C  D  E  F  G  H  ")
+        println("\n   A  B  C  D  E  F  G  H  ")
 
         // define row number
         var rowNo = 1
@@ -70,5 +71,4 @@ class Island(
         // return pirate or treasure or null
         return pirate ?: treasure
     }
-
 }
