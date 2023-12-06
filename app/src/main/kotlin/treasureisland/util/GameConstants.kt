@@ -8,6 +8,8 @@ object GameConstants {
     const val GREEN = "\u001B[32m"
     const val BLUE = "\u001B[34m"
     const val YELLOW = "\u001B[33m"
+    const val MAGENTA = "\u001B[35m"
+    const val CYAN = "\u001B[36m"
     const val CLEAR_SCREEN = "\u001b[H\u001b[2J"
 
     // Cell entities constants
