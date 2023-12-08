@@ -2,38 +2,37 @@ package treasureisland.game
 
 import treasureisland.util.GameConstants as GC
 
-class GameController(
-    private val game: Game = Game(),
-    private val userInputHandler: UserInputHandler = UserInputHandler()
+class SessionController(
+    private val session: Session,
 ) {
 
     fun run() {
-        game.start()
+
+        session.start()
 
         while (true) {
-
             var userInput: Pair<Int, Int>
 
             while (true) {
-                userInput = userInputHandler.getUserInput()
+                userInput = PlayerInputHandler.getPlayerInput()
 
                 // check if cell has already been revealed
-                if (!game.island.revealedCells.contains(userInput)) break
+                if (!session.getIsland.getRevealedCells.contains(userInput)) break
                 println("Cell already revealed, try again!")
 
             }
 
-            // update the game state
-            game.update(userInput)
+            // update session state
+            session.update(userInput)
 
-            // break if game is over
-            if (game.isGameOver) {
+            // break if session is over
+            if (session.isSessionOver) {
+                session.end()
                 break
             }
 
             // check surrounding cells and print clues
             println("${GC.MAGENTA}${generateClues(userInput)}${GC.COLOR_RESET}\n")
-
         }
 
     }
@@ -61,7 +60,7 @@ class GameController(
                     continue  // Skip the revealed cell
                 }
 
-                if (game.island.treasures.any { it.coordinates == Pair(currentRow, currentCol) }) {
+                if (session.getIsland.getTreasures.any { it.getCoordinates == Pair(currentRow, currentCol) }) {
                     return treasureClue
                 }
             }
@@ -81,7 +80,7 @@ class GameController(
                     continue  // Skip the revealed cell
                 }
 
-                if (game.island.pirates.any { it.coordinates == Pair(currentRow, currentCol) }) {
+                if (session.getIsland.getPirates.any { it.getCoordinates == Pair(currentRow, currentCol) }) {
                     return pirateClue
                 }
             }
