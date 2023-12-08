@@ -1,8 +1,8 @@
 package treasureisland.game
 
-class UserInputHandler {
+class PlayerInputHandler {
 
-    fun getUserInput(): Pair<Int, Int> {
+    fun getPlayerInput(): Pair<Int, Int> {
         val rowInput = getValidRow()
         val colInput = getValidColumn()
         return Pair(rowInput, colInput)
@@ -31,7 +31,6 @@ class UserInputHandler {
     }
 
     private fun colToInt(col: String): Int {
-
         return when (col.uppercase()) {
             "A" -> 0
             "B" -> 1
@@ -43,10 +42,5 @@ class UserInputHandler {
             "H" -> 7
             else -> -1
         }
-
     }
-
-
-
-
 }

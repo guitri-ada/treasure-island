@@ -7,18 +7,28 @@ import treasureisland.model.Player
 import treasureisland.model.Treasure
 
 class Game(
-    val island: Island = Island(),
-    val player: Player = Player(),
-    var treasureCount: Int = 0,
-    var isGameOver: Boolean = false
+    private val player: Player,
+    private val island: Island = Island(),
+    private var treasureCount: Int = 0,
+    private var gameOver: Boolean = false
+
 ) {
 
 
+    // game start
     fun start() {
-        println("\n \uD83C\uDFDD\uFE0F WELCOME TO TREASURE ISLAND \uD83C\uDFDD\uFE0F \n")
+
+        // print island
         island.print()
+
+        // for testing only!!
+        island.getTreasures.forEach() {
+            treasure ->  println(treasure.getCoordinates.toString())
+        }
     }
 
+
+    // game update
     fun update(userInput: Pair<Int, Int>) {
 
         // reveal cell corresponding to user input
@@ -35,19 +45,19 @@ class Game(
 
                 usersActionResult =
                 "${GC.RED}Oh no! It's a pirate!\n" +
-                "They're stealing ${revealedCellObject.percentOffTreasureVal}% off your gold!${GC.COLOR_RESET}\n"
+                "They're stealing ${revealedCellObject.getPercentOffTreasureVal}% off your gold!${GC.COLOR_RESET}\n"
 
-                player.score -= (player.score * revealedCellObject.percentOffTreasureVal / 100)
+                player.score -= (player.score * revealedCellObject.getPercentOffTreasureVal / 100)
             }
 
             is Treasure -> {
                 usersActionResult =
-                    "${GC.GREEN}You found $${revealedCellObject.value} of gold!${GC.COLOR_RESET}\n"
+                    "${GC.GREEN}You found $${revealedCellObject.getValue} of gold!${GC.COLOR_RESET}\n"
 
-                player.score += revealedCellObject.value
+                player.score += revealedCellObject.getValue
 
                 // if 5 treasures have been found, game is over
-                isGameOver = (++treasureCount == 5)
+                gameOver = (++treasureCount > 1)
             }
 
             null -> {
@@ -64,14 +74,32 @@ class Game(
 
         // print user action result (pirate, treasure or empty)
         println("\n${usersActionResult}")
-
     }
 
 
+    // game ending
     fun end() {
+
+        // add score to player's score history
+        player.addScoreToLeaderboard(player.score)
+
+        // print end message and player's score
         println("You found all the treasures! Congratulations!")
         println("\nYour score is ${player.score}!")
 
+        // reset player score to 0
+        player.resetScore()
     }
+
+
+    // getters
+    val getPlayer: Player
+        get() = player
+
+    val isGameOver: Boolean
+        get() = gameOver
+
+    val getIsland: Island
+        get() = island
 
 }

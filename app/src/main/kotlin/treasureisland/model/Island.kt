@@ -6,9 +6,9 @@ import treasureisland.util.GameConstants as GC
 
 class Island(
     private var grid: Array<MutableList<String>> = arrayOf(),
-    val pirates: MutableList<Pirate> = mutableListOf(),
-    val treasures: MutableList<Treasure> = mutableListOf(),
-    var revealedCells: MutableSet<Pair<Int, Int>> = mutableSetOf()
+    private val pirates: MutableList<Pirate> = mutableListOf(),
+    private val treasures: MutableList<Treasure> = mutableListOf(),
+    private var revealedCells: MutableSet<Pair<Int, Int>> = mutableSetOf()
 ) {
 
     init {
@@ -52,8 +52,8 @@ class Island(
     fun revealCell(cell: Pair<Int, Int>): Any? {
 
         // check valid cell input against pirate/treasure coordinates
-        val pirate = pirates.find { it.coordinates == cell }
-        val treasure = treasures.find { it.coordinates == cell }
+        val pirate = pirates.find { it.getCoordinates == cell }
+        val treasure = treasures.find { it.getCoordinates == cell }
 
         // define cellType to print accordingly
         val cellType = when {
@@ -71,4 +71,15 @@ class Island(
         // return pirate or treasure or null
         return pirate ?: treasure
     }
+
+    // getters
+    val getPirates: MutableList<Pirate>
+        get() = pirates
+
+    val getTreasures: MutableList<Treasure>
+        get() = treasures
+
+    val getRevealedCells: MutableSet<Pair<Int, Int>>
+        get() = revealedCells
+
 }
