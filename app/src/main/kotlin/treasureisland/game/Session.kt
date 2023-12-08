@@ -6,12 +6,12 @@ import treasureisland.model.Pirate
 import treasureisland.model.Player
 import treasureisland.model.Treasure
 
-class Game(
+class Session(
     private val player: Player,
+    private val leaderboard: Leaderboard,
     private val island: Island = Island(),
     private var treasureCount: Int = 0,
-    private var gameOver: Boolean = false
-
+    private var sessionOver: Boolean = false
 ) {
 
 
@@ -57,7 +57,7 @@ class Game(
                 player.score += revealedCellObject.getValue
 
                 // if 5 treasures have been found, game is over
-                gameOver = (++treasureCount > 1)
+                sessionOver = (++treasureCount >= 1)
             }
 
             null -> {
@@ -79,9 +79,8 @@ class Game(
 
     // game ending
     fun end() {
-
-        // add score to player's score history
-        player.addScoreToLeaderboard(player.score)
+        // add player score to leaderboard
+        leaderboard.addScore(player.name, player.score)
 
         // print end message and player's score
         println("You found all the treasures! Congratulations!")
@@ -96,8 +95,8 @@ class Game(
     val getPlayer: Player
         get() = player
 
-    val isGameOver: Boolean
-        get() = gameOver
+    val isSessionOver: Boolean
+        get() = sessionOver
 
     val getIsland: Island
         get() = island
