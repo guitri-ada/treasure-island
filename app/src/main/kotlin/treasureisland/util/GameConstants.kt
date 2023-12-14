@@ -18,7 +18,7 @@ object GameConstants {
     const val EMPTY_CELL = "$BLUE □ $COLOR_RESET"
 
     // Treasure constants
-    val TREASURE_VALUES = listOf(100, 100, 500, 500, 1000)
+    val TREASURE_VALUES = listOf(100, 200, 500, 1000)
 
     // Pirate constants
     val PIRATE_PERCENT_OFF = listOf(10, 10, 20, 20, 50)
