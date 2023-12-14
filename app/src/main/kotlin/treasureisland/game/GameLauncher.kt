@@ -1,6 +1,7 @@
 package treasureisland.game
 
 import treasureisland.model.Player
+import treasureisland.util.GameConstants as GC
 
 class GameLauncher(
     private val leaderboard: Leaderboard = Leaderboard()
@@ -44,11 +45,11 @@ class GameLauncher(
 
     // print menu
     private fun printMenuOptions() {
-        println("Select an option below:")
-        println("1. Play again")
-        println("2. New Player")
-        println("3. Leaderboard")
-        println("4. Exit")
+        println("\n${"\u001B[4mSELECT AN OPTION\u001B[0m"}")
+        println("${GC.GREEN}1. Play again")
+        println("${GC.BLUE}2. New Player")
+        println("${GC.MAGENTA}3. Leaderboard")
+        println("${GC.RED}4. Exit${GC.COLOR_RESET}")
     }
 
     // create new session
@@ -60,7 +61,7 @@ class GameLauncher(
 
     // create new player
     private fun newPlayer(): Player {
-        println("\n\nEnter you name to start a new game:")
+        println("\nEnter you name to start a new game:")
         return Player(readln())
     }
 
