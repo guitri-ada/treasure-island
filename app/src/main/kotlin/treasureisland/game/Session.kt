@@ -20,11 +20,6 @@ class Session(
 
         // print island
         island.print()
-
-        // for testing only!!
-        island.getTreasures.forEach() {
-            treasure ->  println(treasure.getCoordinates.toString())
-        }
     }
 
 
@@ -83,8 +78,8 @@ class Session(
         leaderboard.addScore(player.name, player.score)
 
         // print end message and player's score
-        println("You found all the treasures! Congratulations!")
-        println("\nYour score is ${player.score}!")
+        println("Congratulations! You found all the treasures!")
+        println("Your score is ${GC.YELLOW}${player.score}${GC.COLOR_RESET}!")
 
         // reset player score to 0
         player.resetScore()
@@ -92,9 +87,6 @@ class Session(
 
 
     // getters
-    val getPlayer: Player
-        get() = player
-
     val isSessionOver: Boolean
         get() = sessionOver
 
