@@ -6,10 +6,11 @@ class Leaderboard(
 
     // print leaderboard
     fun display() {
+        println("\n\uD83C\uDFC6 ${"\u001B[4mLeaderboard\u001B[0m"} \uD83C\uDFC6\n")
         scores.withIndex().forEach { (rank, score) ->
-            println("${rank + 1}. ${score.first}: ${score.second}")
+            println("   ${rank + 1}. ${score.first}: ${score.second}")
         }
-        println("Press ENTER to return to the menu.")
+        println("\nPress ENTER to return to the menu.")
         readln()
     }
 
