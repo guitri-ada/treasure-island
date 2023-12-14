@@ -1,14 +1,15 @@
 package treasureisland.model
 
+import treasureisland.game.CoordinateHolder
+
 
 class Pirate(
     private val coordinates: Pair<Int, Int>?,
     private val percentOffTreasureVal: Int
-) {
+) : CoordinateHolder {
 
     // getters
-    val getCoordinates: Pair<Int, Int>?
-        get() = coordinates
+    override fun getCoordinates() = coordinates
 
     val getPercentOffTreasureVal: Int
         get() = percentOffTreasureVal

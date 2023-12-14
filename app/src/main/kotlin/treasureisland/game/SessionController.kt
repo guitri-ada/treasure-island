@@ -19,7 +19,6 @@ class SessionController(
                 // check if cell has already been revealed
                 if (!session.getIsland.getRevealedCells.contains(userInput)) break
                 println("Cell already revealed, try again!")
-
             }
 
             // update session state
@@ -37,41 +36,24 @@ class SessionController(
 
     }
 
+
     private fun generateClues(cell: Pair<Int, Int>): String {
-        val treasureMessage = isTreasureNearby(cell)
-        val pirateMessage = isPirateNearby(cell)
+        val isTreasureNearby = isTargetNearby(cell, session.getIsland.getTreasures)
+        val isPirateNearby = isTargetNearby(cell, session.getIsland.getPirates)
+
+        val treasureClue = "\uD83D\uDD0E ${GC.GREEN}T${GC.MAGENTA} You sense a treasure nearby!"
+        val pirateClue = "\uD83D\uDD0E ${GC.RED}X${GC.MAGENTA} Pirates are lurking around here."
 
         return when {
-            treasureMessage != null && pirateMessage != null -> "$treasureMessage\n$pirateMessage"
-            treasureMessage != null -> treasureMessage
-            pirateMessage != null -> pirateMessage
+            isTreasureNearby && isPirateNearby -> "$treasureClue\n$pirateClue"
+            isTreasureNearby -> "\uD83D\uDD0E ${GC.GREEN}T${GC.MAGENTA} You sense a treasure nearby!"
+            isPirateNearby -> "\uD83D\uDD0E ${GC.RED}X${GC.MAGENTA} Pirates are lurking around here."
             else -> "\uD83D\uDD0E No treasures or pirates detected around."
         }
     }
 
-    private fun isTreasureNearby(cell: Pair<Int, Int>): String? {
 
-        val treasureClue = "\uD83D\uDD0E ${GC.GREEN}T${GC.MAGENTA} You sense a treasure nearby!"
-
-        for (currentRow in cell.first - 1..cell.first + 1) {
-            for (currentCol in cell.second - 1..cell.second + 1) {
-
-                if (currentRow == cell.first && currentCol == cell.second) {
-                    continue  // Skip the revealed cell
-                }
-
-                if (session.getIsland.getTreasures.any { it.getCoordinates == Pair(currentRow, currentCol) }) {
-                    return treasureClue
-                }
-            }
-        }
-
-        return null
-    }
-
-    private fun isPirateNearby(cell: Pair<Int, Int>): String? {
-
-        val pirateClue = "\uD83D\uDD0E ${GC.RED}X${GC.MAGENTA} Pirates are lurking around here."
+    private fun <T : CoordinateHolder> isTargetNearby(cell: Pair<Int, Int>, targets: MutableList<T>): Boolean {
 
         for (currentRow in cell.first - 1..cell.first + 1) {
             for (currentCol in cell.second - 1..cell.second + 1) {
@@ -80,12 +62,12 @@ class SessionController(
                     continue  // Skip the revealed cell
                 }
 
-                if (session.getIsland.getPirates.any { it.getCoordinates == Pair(currentRow, currentCol) }) {
-                    return pirateClue
+                if (targets.any { it.getCoordinates() == Pair(currentRow, currentCol) }) {
+                    return true
                 }
             }
         }
-        return null
-    }
 
+        return false
+    }
 }

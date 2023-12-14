@@ -52,8 +52,8 @@ class Island(
     fun revealCell(cell: Pair<Int, Int>): Any? {
 
         // check valid cell input against pirate/treasure coordinates
-        val pirate = pirates.find { it.getCoordinates == cell }
-        val treasure = treasures.find { it.getCoordinates == cell }
+        val pirate = pirates.find { it.getCoordinates() == cell }
+        val treasure = treasures.find { it.getCoordinates() == cell }
 
         // define cellType to print accordingly
         val cellType = when {
