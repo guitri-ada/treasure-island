@@ -37,6 +37,7 @@ class GameLauncher(
                 }
                 "3" -> leaderboard.display()
                 "4" -> break
+                else -> println("Invalid entry. Please select a menu option (1-4)")
             }
         }
 
