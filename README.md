@@ -17,7 +17,8 @@ from pirates.
 
 ### <ins>c) Initial working plan, overall approach, development strategy and approach to quality (linked to 1a, 1b).</ins>
 
-#### Initial working plan:
+**Initial working plan:**
+
 In the initial phase of development, the focus was on establishing the fundamental 
 elements of the game. This began with the creation of a base grid representing the 
 cells constituting the island. Then, pirates and treasures were integrated into the 
@@ -25,7 +26,8 @@ grid, allowing the implementation of the clue system. Following this, the player
 functionality was developed, incorporating a scoring mechanism.  All these elements 
 together formed the foundation of Treasure Island. 
 
-#### Development strategy:
+**Development strategy:**
+
 Treasure Island was developed using the walking skeleton approach, aligning with the 
 Agile methodology. As mentioned above, the aim was to develop the foundational structure 
 of the game first and then gradually add features and improvements.
@@ -35,7 +37,8 @@ flexibility in the development process, resulting in a more robust solution. Reg
 strategic commits have been made to the Github repository to main a well-organised and 
 traceable development history. 
 
-#### Approach to quality:
+**Approach to quality:**
+
 The approach to quality was to continually try to 'break the code' by rigorously testing 
 each new functionality to identify and address potential issues early on. Additionally, 
 the code was continually assessed and refactored whenever relevant and necessary to ensure 
@@ -117,7 +120,7 @@ readability and clarity throughout the project.
 
 ### <ins>b/c/d/e) Phase _n_ development: tasks, code review and changes (linked to 1d,1e).</ins>
 
-#### <ins>PHASE 1 - Foundation – Grid model development</ins>
+**<ins>PHASE 1 - Foundation – Grid model development</ins>**
 
 **Grid/Island:**
 - Create a `Grid` class
@@ -130,7 +133,7 @@ readability and clarity throughout the project.
 - Define grid cells constants (INITIAL, EMPTY, TREASURE, PIRATE)
 - Integrate to `Grid` class
 
-#### <ins>PHASE 2 - Pirate and Treasure models integration</ins>
+**<ins><ins>PHASE 2 - Pirate and Treasure models integration</ins>**
 
 **Coordinates Pool:**
 - Implement a `Coordinates` pool object as a 'MutableSet' of integer 'Pairs'.
@@ -152,7 +155,7 @@ readability and clarity throughout the project.
 - Integrate a `MutableList` of both `Pirate` and `Treasure` instances as properties of the `Grid` class
 - Test `Grid` instantiation and its mutable lists by printing new instance's properties values
 
-#### <ins>PHASE 3 - Player model and Score Calculation</ins>
+**<ins>PHASE 3 - Player model and Score Calculation</ins>**
 
 **Player Class:**
 - Create a `Player` class with a 'score' property
@@ -166,7 +169,7 @@ readability and clarity throughout the project.
 - Add in score property update logic where player unveils treasure or pirate cells
 - Test functioning of score update
 
-#### <ins>PHASE 4 - Game class and game flow controller</ins>
+**<ins>PHASE 4 - Game class and game flow controller</ins>**
 
 **Game Class:**
 - Create a `Game` class with `Grid` and `Player` instantiations as properties
@@ -209,7 +212,7 @@ which can involve multiple sessions and players.
 
 ### <ins>a) Analysis with embedded examples of key code refactoring, reuse, smells.</ins>
 
-#### Code reuse:
+**<ins>Code reuse:</ins>**
 
 - **Coordinates Object:**
 The `Coordinates` object provides a reusable mechanism for obtaining unique coordinates, 
@@ -224,7 +227,7 @@ facilitating code reuse and consistency throughout the application.
 ![img_1.png](images/game_constants.png)
 
 
-#### Code smell:
+**<ins>Code smell:</ins>**
 
 - **Nested Loops:**
 Nested loops in `SessionController` and `isTargetNearby()` might impact 
