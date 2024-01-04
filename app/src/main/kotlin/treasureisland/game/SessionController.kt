@@ -6,14 +6,19 @@ class SessionController(
     private val session: Session,
 ) {
 
+    // session runner
     fun run() {
 
+        // start a new session
         session.start()
 
         while (true) {
+
             var userInput: Pair<Int, Int>
 
             while (true) {
+
+                // get player input
                 userInput = PlayerInputHandler.getPlayerInput()
 
                 // check if cell has already been revealed
@@ -37,6 +42,7 @@ class SessionController(
     }
 
 
+    // generate clues based on revealed cell
     private fun generateClues(cell: Pair<Int, Int>): String {
         val isTreasureNearby = isTargetNearby(cell, session.getIsland.getTreasures)
         val isPirateNearby = isTargetNearby(cell, session.getIsland.getPirates)
@@ -53,6 +59,7 @@ class SessionController(
     }
 
 
+    // check if a target (pirate and/or treasure) are nearby
     private fun <T : CoordinateHolder> isTargetNearby(cell: Pair<Int, Int>, targets: MutableList<T>): Boolean {
 
         for (currentRow in cell.first - 1..cell.first + 1) {

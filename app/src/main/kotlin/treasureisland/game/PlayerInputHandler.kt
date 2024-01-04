@@ -2,13 +2,16 @@ package treasureisland.game
 
 class PlayerInputHandler {
 
+    // all methods below are static (called 'companion object' in kotlin)
     companion object {
+
         fun getPlayerInput(): Pair<Int, Int> {
             val rowInput = getValidRow()
             val colInput = getValidColumn()
             return Pair(rowInput, colInput)
         }
 
+        // get valid row input
         private fun getValidRow(): Int {
             while (true) {
                 try {
@@ -22,6 +25,7 @@ class PlayerInputHandler {
             }
         }
 
+        // get valid column input
         private fun getValidColumn(): Int {
             while (true) {
                 print("COLUMN: ")
@@ -31,6 +35,7 @@ class PlayerInputHandler {
             }
         }
 
+        // convert column letters into integer (index)
         private fun colToInt(col: String): Int {
             return when (col.uppercase()) {
                 "A" -> 0
