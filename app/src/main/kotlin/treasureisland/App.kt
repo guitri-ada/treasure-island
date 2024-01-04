@@ -1,13 +1,8 @@
 package treasureisland
 
-class App {
-    val greeting: String
-        get() {
-            return "Hello World!"
-        }
-}
+import treasureisland.game.GameLauncher
 
 fun main() {
-    println(App().greeting)
+    val gameLauncher = GameLauncher()
+    gameLauncher.launchGame()
 }
-
