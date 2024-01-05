@@ -51,8 +51,8 @@ class Session(
 
                 player.score += revealedCellObject.getValue
 
-                // if 5 treasures have been found, game is over
-                sessionOver = (++treasureCount >= 1)
+                // if 4 treasures have been found, game is over
+                sessionOver = (++treasureCount >= 4)
             }
 
             null -> {
