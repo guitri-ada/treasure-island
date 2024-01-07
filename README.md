@@ -34,7 +34,7 @@ of the game first and then gradually add features and improvements.
 By breaking down the development into manageable steps, I could continuously refine 
 the code quality and the overall functionality of the game. This approach also ensured 
 flexibility in the development process, resulting in a more robust solution. Regular and 
-strategic commits have been made to the Github repository to main a well-organised and 
+strategic commits have been made to the Github repository to maintain a well-organised and 
 traceable development history. 
 
 **Approach to quality:**
@@ -58,7 +58,7 @@ a scoring system that dynamically calculates and updates the player's score base
 their actions.
 4. **Game, Controller & Clue System:**
 Implement classes and methods to control the game flow, updating the grid and player's 
-states in real-time. Additionally, Introduce a clue system that dynamically generates 
+states in real-time. Additionally, introduce a clue system that dynamically generates 
 hints for players, guiding them on the presence of pirates, treasures, or both in adjacent 
 cells. Ensure seamless interactions and a coherent gaming experience by combining all previous 
 implementations.
@@ -68,7 +68,7 @@ implementations.
 
 1. **Foundation – Grid model development:**
     - **Grid/Island:** Build the initial empty grid structure, forming the cells constituting the island.
-    - **Game Constants:** Define and implement a set of game constants to establish the foundational parameters of the grid, ensuring consistency throughout the game.
+    - **Game Constants:** Define and implement a set of game constants to establish the foundations of the grid, ensuring consistency throughout the game.
 
 2. **Pirate and Treasure models integration:**
     - **Coordinates Pool:** Develop a coordinates pool to manage and provide valid positions for placing pirates and treasures within the grid.
@@ -83,24 +83,23 @@ implementations.
 4. **Game, Controller & Clue System:**
     - **Game Class:** Create an Island class to encapsulate the game state, managing the grid, pirates, treasures, and player interactions.
     - **Clue System:** Design and implement a clue generator that dynamically analyses the grid's state and generates clues for players, indicating the presence of nearby pirates, treasures, or both.
-    - **Game flow Controller:** Implement a game controller responsible for coordinating various aspects of gameplay, including grid update, cells uncovering, clue generation, and player's score update.
+    - **Game flow Controller:** Implement a game controller responsible for coordinating various aspects of the gameplay, including grid update, cells uncovering, clue generation, and player's score update.
 
 ## 2. Development
 
 ### <INS>a) Adoption and use of ‘good’ standards (linked to 1a, 1b, 1c).</ins>
 
-**DRY Principle (Don't Repeat Yourself):** The continuous refactoring for code quality 
-improvement follow the Don't Repeat Yourself principle. By regularly refining and optimizing
-the codebase, unnecessary duplications were minimized, promoting maintainability and reducing
+**DRY Principle (Don't Repeat Yourself):** The continuous refactoring of the code follows the Don't Repeat Yourself principle. By regularly refining and optimising
+the code, unnecessary duplications were minimized, promoting maintainability and reducing
 the risk of errors.
 
-**Separation of Concerns:** Separation of concern was enforced during the development of
+**Separation of Concerns:** Separation of concerns was enforced during the development of
 the game. This approach facilitated clear distinctions between methods and class 
 functionalities, enhancing code clarity and maintainability.
 
 **Modularisation:** During the development process, the game logic was broken down
-into distinct components. This not only improved code organisation but also promoted 
-reusability, aligning with agile development process. Furthermore, modularisation 
+into distinct components. This not only improved the code structure but also promoted 
+reusability, aligning with agile development process. Additionally, modularisation 
 simplifies the implementation of new features and functionalities.
 
 **Version Control:** GitHub was used for version controlling. Regular commits were made, 
@@ -113,9 +112,9 @@ ensured robustness and quality for every new implementation during the developme
 
 **Naming Conventions:** Throughout the development, consistent and meaningful name 
 conventions were used. This practice enhanced code readability and contributes to
-the maintainability of the project, aligning with industry standards.
+the maintainability of the project, aligning with industry good practices.
 
-**Comments:** The codebase has been extensively but briefly commented to improve 
+**Comments:** The code has been extensively and accurately commented to improve 
 readability and clarity throughout the project. 
 
 ### <ins>b/c/d/e) Phase _n_ development: tasks, code review and changes (linked to 1d,1e).</ins>
@@ -124,7 +123,7 @@ readability and clarity throughout the project.
 
 **Grid/Island:**
 - Create a `Grid` class
-- Build an initializer forming 8 arrays of size 8. Each index (cell) should be represented by a square symbol '■'. Use ANSI blue color for the cells.
+- Build an initialiser forming 8 arrays of size 8. Each index (cell) should be represented by a square symbol '■'. Use ANSI blue color for the cells.
 - Test by printing to the console
 
 **Game Constants:**
@@ -161,12 +160,12 @@ readability and clarity throughout the project.
 - Create a `Player` class with a 'score' property
 
 **Player Input Handler:**
-- Create an `InputHandler` class formed with methods wrapped in a companion object
+- Create an `InputHandler` class formed with methods wrapped in a companion object (static)
 - Define effective and safe methods to prompt the player to enter row and column coordinates
 - Test for invalid inputs and add error handling code
 
 **Score Calculation:**
-- Add in score property update logic where player unveils treasure or pirate cells
+- Add score property update logic when player unveils treasure or pirate cells
 - Test functioning of score update
 
 **<ins>PHASE 4 - Game class and game flow controller</ins>**
@@ -175,7 +174,7 @@ readability and clarity throughout the project.
 - Create a `Game` class with `Grid` and `Player` instantiations as properties
 - Define a `start()` method to start a new game
 - Define an `update()` method to update the game elements, including the `Grid`
-- Define an `end()` method that controls the game over state
+- Define an `end()` method that controls the 'game over' state
 - Test all defined methods and assert correct instantiation of objects, including their properties
 
 **Game flow Controller:**
@@ -196,9 +195,9 @@ readability and clarity throughout the project.
 One of the key design challenges was to keep a low coupling throughout the codebase and minimise 
 class interdependence. To do so, class responsibilities were clearly separated and no unnecessary 
 interdependence was implemented.
-As we can see in the UML diagram below, the Treasure and the Pirate classes only depends on the 
+As we can see in the UML diagram below, the Treasure and Pirate classes only depend on the 
 Island class and the Session class only depends on the Island class. The Player and Leaderboard 
-classes do not depend on the Island class but the session class instead, allowing a single player
+classes do not depend on the Island class but the Session class instead, allowing a single player
 to play multiple sessions and the leaderboard to keep track of all the scores independently of the
 players.
 The SessionController class orchestrates the current session and player instances as well as the 
@@ -240,8 +239,8 @@ this piece of code for future improvements.
 
 - **Singleton:**
 The `Coordinates` and `GameConstants` objects follow the singleton pattern. 
-It ensures that only one instance of Coordinates exists, providing a 
-centralised and unique source for generating and assigning coordinates.<br>
+It ensures that only one instance of each Coordinates and GameConstants exist, providing a 
+centralised and unique source for generating/assigning coordinates and use constants.<br>
   ![img.png](images/singleton.png)
   <br><br>
 
@@ -255,7 +254,7 @@ to be called directly on the class without creating instances of it.<br>
 
 - **Interface:**
 The `CoordinateHolder` interface is implemented by the `Pirate` and `Treasure` classes. 
-It defines a common contract (`getCoordinates()` method) that both classes must 
+It defines a common contract (to have the `getCoordinates()` method) that both classes must 
 adhere to. This promotes a consistent interface for objects with coordinates.<br>
 ![img.png](images/interface.png)
 <br><br>
@@ -283,7 +282,7 @@ The `isTaretNearby()` function in `SessionController` dynamically generates
 clues based on the player's input, indicating the proximity of treasures or 
 pirates. This enhances the gameplay by providing valuable hints. The function 
 makes good use of Kotlin's functional programming aspects, especially with the 
-`any` and `it` keywords. Additionally, the standard for loops are clear and 
+`any` and `it` keywords. Additionally, the standard 'for' loops are clear and 
 easy to understand. Finally, the use of generics `<T : CoordinateHolder>` allows
 the function to work with any type that implements the `CoordinateHolder` 
 interface, in this case `Pirate` and `Treasure`.<br>
@@ -303,13 +302,13 @@ gameplay to session completion. <br>
 Below are key algorithms and details on their design, implementation, and testing.
 
 **Efficient Coordinate Generation:**
-- *Research/Design:* The `Coordinates` object utilizes a unique algorithm for generating coordinates, ensuring uniqueness and efficiency.
+- *Research/Design:* The `Coordinates` object utilises a single algorithm for generating unique valid coordinates.
 - *Implementation:* The `getUniqueCoordinates()` function dynamically generates coordinates from a pool, efficiently managing memory.
-- *Tested Confirmation:* Rigorous testing confirms the uniqueness of generated coordinates, ensuring proper game functioning.
+- *Tested Confirmation:* Rigorous testing confirms the uniqueness and validity of generated coordinates.
 
 **Dynamic Clue Generation Algorithm:**
 - *Research/Design:* The `generateClues()` function in `SessionController` involves a dynamic algorithm to generate clues based on player input.
-- *Implementation:* The algorithm accurately determines the presence of treasures or pirates based on adjacent cells.
+- *Implementation:* The algorithm accurately determines the presence of treasures or pirates on cells directly surrounding any revealed cell.
 - *Tested Confirmation:* Testing of various inputs confirms the algorithm's accuracy in generating correct clues.
 
 **Leaderboard Sorting Algorithm:**
